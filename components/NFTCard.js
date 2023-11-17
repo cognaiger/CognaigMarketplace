@@ -50,12 +50,12 @@ const NFTCard = ({ nftItem, title, listings }) => {
             <div className={style.collectionName}>{title}</div>
             <div className={style.assetName}>{nftItem.name}</div>
           </div>
-          {isListed && (
+          {isListed && (  
             <div className={style.infoRight}>
               <div className={style.priceTag}>Price</div>
               <div className={style.priceValue}>
                 <img
-                  src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                  src="https://res.coinpaper.com/coinpaper/f_webp,c_limit,w_3840,q_70/ethereum_eth_logo_b64861bd15.svg"
                   alt="eth"
                   className={style.ethLogo}
                 />

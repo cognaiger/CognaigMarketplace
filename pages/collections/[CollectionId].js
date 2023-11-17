@@ -34,7 +34,7 @@ const style = {
 const Collection = () => {
   const router = useRouter()
   const { provider } = useWeb3()
-  const { collectionId } = router.query
+  const { CollectionId } = router.query
   const [collection, setCollection] = useState({})
   const [nfts, setNfts] = useState([])
   const [listings, setListings] = useState([])
@@ -48,17 +48,17 @@ const Collection = () => {
       provider.getSigner(),
       'https://eth-sepolia.g.alchemy.com/v2/otK9yREOSc0kq7ET0pjNkZHAAeFaycNM'
     )
-    return sdk.getNFTModule(collectionId)
+    return sdk.getNFTModule(CollectionId)
   }, [provider])
 
   // get all NFTs in the collection
   useEffect(() => {
     if (!nftModule) return
-    ;(async () => {
-      const nfts = await nftModule.getAll()
+      ; (async () => {
+        const nfts = await nftModule.getAll()
 
-      setNfts(nfts)
-    })()
+        setNfts(nfts)
+      })()
   }, [nftModule])
 
   const marketPlaceModule = useMemo(() => {
@@ -76,13 +76,13 @@ const Collection = () => {
   // get all listings in the collection
   useEffect(() => {
     if (!marketPlaceModule) return
-    ;(async () => {
-      setListings(await marketPlaceModule.getAllListings())
-    })()
+      ; (async () => {
+        setListings(await marketPlaceModule.getAllListings())
+      })()
   }, [marketPlaceModule])
 
   const fetchCollectionData = async (sanityClient = client) => {
-    const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
+    const query = `*[_type == "marketItems" && contractAddress == "${CollectionId}" ] {
       "imageUrl": profileImage.asset->url,
       "bannerImageUrl": bannerImage.asset->url,
       volumeTraded,
@@ -104,10 +104,10 @@ const Collection = () => {
 
   useEffect(() => {
     fetchCollectionData()
-  }, [collectionId])
+  }, [CollectionId])
 
   console.log(router.query)
-  console.log(router.query.collectionId)
+  console.log(router.query.CollectionId)
   return (
     <div className="overflow-hidden">
       <Header />
@@ -181,7 +181,7 @@ const Collection = () => {
             <div className={style.collectionStat}>
               <div className={style.statValue}>
                 <img
-                  src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                  src="https://res.coinpaper.com/coinpaper/f_webp,c_limit,w_3840,q_70/ethereum_eth_logo_b64861bd15.svg"
                   alt="eth"
                   className={style.ethLogo}
                 />
@@ -192,7 +192,7 @@ const Collection = () => {
             <div className={style.collectionStat}>
               <div className={style.statValue}>
                 <img
-                  src="https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg"
+                  src="https://res.coinpaper.com/coinpaper/f_webp,c_limit,w_3840,q_70/ethereum_eth_logo_b64861bd15.svg"
                   alt="eth"
                   className={style.ethLogo}
                 />
@@ -220,4 +220,4 @@ const Collection = () => {
   )
 }
 
-export default Collection
+export default Collection;
